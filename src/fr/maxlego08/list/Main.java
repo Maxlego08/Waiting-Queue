@@ -30,8 +30,8 @@ public class Main {
 		
 		ScheduledExecutorService ses = Executors.newScheduledThreadPool(3);
 		
-		int port = 1234, mcPort = 25953;
-		String adress = "193.70.103.115";
+		int port = 1234, mcPort = 25565;
+		String adress = "localhost";
 		
 		if (args.length == 3) {
 			adress = args[0];
