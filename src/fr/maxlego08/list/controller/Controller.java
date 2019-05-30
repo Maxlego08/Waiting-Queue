@@ -108,6 +108,13 @@ public class Controller {
 		
 		}
 	}
+
+
+	public void stop() {
+		
+		players.forEach(player -> player.send(Action.STOP, ""));
+		
+	}
 	
 	
 }

@@ -14,6 +14,10 @@ import net.minecraft.client.multiplayer.GuiConnecting;
 
 public class Controller {
 
+	/*
+	 * You must create the controller in your main class
+	 * */
+	
 	private int position = 0;
 	private int onlinePlayer = 0;
 	private int maxPlayer = 0;
@@ -29,8 +33,11 @@ public class Controller {
 		ClientSocket client = new ClientSocket("localhost", 1234);
 		isConnect = client.isConnect();
 		if (isConnect){
-			/* On envoie l'information que le mec se connect au serveur */
+			/* We send the information that the guy connects to the server */
 			canConnect = false;
+			
+			/* OldFight.getInstance().getUser() return player name */
+			
 			send(Action.CONNECT, OldFight.getInstance().getUser());
 		}else Minecraft.getMinecraft().displayGuiScreen(new GuiMainMenu());
 	}
@@ -51,13 +58,18 @@ public class Controller {
 			position = (int)object;
 			break;
 		case CAN_CONNECT:
-			connectServer();
+			connectServer();			
 			break;
+		case STOP:
+			Minecraft.getMinecraft().displayGuiScreen(new GuiMainMenu());
+			break;			
 		default:
 			break;
 		}
 	}
 
+	/* you must call this function in the class GuiScreen at drawScreen */
+	
 	public void display(GuiScreen screen, Minecraft mc){
 		
 		if (canConnect){
@@ -68,11 +80,7 @@ public class Controller {
 		
 		if (!displayInformation || !isConnect) return;
 		
-		Module module = new Module(screen.width - 100, 5, 80, 40);
-		module.setFillColor(1711276032, 10, 10);
-
-		Module down = new Module(screen.width - 90, 45, 80, 2);
-		down.setFillColor(new Color(255, 180, 0).getRGB());
+		screen.drawRect(screen.width - 100, 5, screen.width - 100 + 80, 45, 1711276032);
 		
 		screen.drawCentredStringScale("§eInformations", screen.width - 60, 10, 1.0f);
 		screen.drawStringScale("§ePosition§7: §6"+position+"§7/§6" + maxPlayerInQueue, screen.width - 90, 20, 1.0f);

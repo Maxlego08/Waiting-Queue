@@ -8,6 +8,7 @@ public enum Action {
 	SEND_ONLINEPLAYER(3),
 	SEND_MAXPLAYER_IN_QUEUE(4),
 	CAN_CONNECT(5),
+	STOP(6),
 	
 	;
 	
